@@ -21,6 +21,7 @@ jobs:
           - { name: Ubuntu 22.04,                  os: ubuntu-22.04,   build-spirv-cross: true,  vendored: false, shell: sh, artifact: 'SDL3_shadercross-linux-x64' }
           - { name: Steam Linux Runtime (Sniper),  os: ubuntu-latest,  build-spirv-cross: false,  vendored: true, shell: sh, artifact: 'SDL3_shadercross-slrsniper', container: 'registry.gitlab.steamos.cloud/steamrt/sniper/sdk:latest' }
           - { name: macOS,                         os: macos-latest,   build-spirv-cross: true,  vendored: true,  shell: sh, artifact: 'SDL3_shadercross-macos-arm64', cmake-arguments: '-DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 -DCMAKE_C_FLAGS="-mmacosx-version-min=11.0" -DCMAKE_CXX_FLAGS="-mmacosx-version-min=11.0"' }
+          - { name: Windows (MSVC x86),            os: windows-2019,   build-spirv-cross: true,  vendored: false, shell: sh, msvc: true, artifact: 'SDL3_shadercross-VC-x86' }
 
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +33,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
         if: ${{ matrix.platform.msvc }}
         with:
-          arch: x64
+          arch: x86
       - name: Set up MSYS2
         if: ${{ matrix.platform.shell == 'msys2 {0}' }}
         uses: msys2/setup-msys2@v2
