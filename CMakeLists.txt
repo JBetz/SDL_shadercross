@@ -239,9 +239,9 @@ foreach(target IN LISTS SDL3_shadercross_targets)
 	sdl_add_warning_options(${target} WARNING_AS_ERROR ${SDLSHADERCROSS_WERROR})
 	target_compile_features(${target} PRIVATE c_std_99)
 
-	if(SDLSHADERCROSS_DXC)
-		add_compile_definitions(SDL_SHADERCROSS_DXC)
-	endif()
+	# if(SDLSHADERCROSS_DXC)
+	#	 add_compile_definitions(SDL_SHADERCROSS_DXC)
+	# endif()
 
 	if(SDLSHADERCROSS_SPIRVCROSS_SHARED)
 		target_link_libraries(${target} PRIVATE spirv-cross-c-shared)
